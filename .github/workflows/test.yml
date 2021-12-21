@@ -3,8 +3,6 @@ name: "Run Scan Action"
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
 
 jobs:
   sarif-image:
@@ -15,37 +13,38 @@ jobs:
     - run: yarn
 
     - name: Run the latest released Scan Action with SARIF generation enabled
-      uses: anchore/scan-action@main
+      uses: kzantow-anchore/scan-action@fix/read-grype-yaml
       with:
         path: "."
-        debug: true
+#        debug: true
         fail-build: false
-        acs-report-enable: true
 
-    - uses: actions/upload-artifact@v2
-      with:
-        name: files
-        path: |
-          vulnerabilities.json
-          results.sarif
+    - run: ls -alF .
 
-    - run: cat results.sarif
+#    - uses: actions/upload-artifact@v2
+#      with:
+#        name: files
+#        path: |
+#          vulnerabilities.json
+#          results.sarif
+#
+#    - run: cat results.sarif
+#
+#    - uses: github/codeql-action/upload-sarif@v1
+#      with:
+#        sarif_file: results.sarif
 
-    - uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: results.sarif
-
-  codeql:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v1
-        with:
-          languages: javascript
-
-      - run: yarn
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
+#  codeql:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Initialize CodeQL
+#        uses: github/codeql-action/init@v1
+#        with:
+#          languages: javascript
+#
+#      - run: yarn
+#
+#      - name: Perform CodeQL Analysis
+#        uses: github/codeql-action/analyze@v1
