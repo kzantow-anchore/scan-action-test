@@ -16,7 +16,7 @@ jobs:
       uses: kzantow-anchore/scan-action@fix/read-grype-yaml
       with:
         path: "."
-#        debug: true
+        debug: true
         fail-build: false
 
     - run: ls -alF .
