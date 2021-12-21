@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
 
+
 jobs:
   sarif-image:
     runs-on: ubuntu-latest
