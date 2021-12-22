@@ -14,8 +14,14 @@ jobs:
     - run: yarn
 
     - run: |
-        ls -alF .
+        set -x
+        ls -alFh .
         cat .grype.yaml
+        curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b ./grype
+        grype/grype --help
+        grype -vv dir:. -o json --file grype.out
+        ls -alFh .
+
 
     - name: Run the latest released Scan Action with SARIF generation enabled
       uses: kzantow-anchore/scan-action@fix/read-grype-yaml
@@ -24,7 +30,7 @@ jobs:
         debug: true
         fail-build: false
 
-    - run: ls -alF .
+    - run: ls -alFh .
 
 #    - uses: actions/upload-artifact@v2
 #      with:
