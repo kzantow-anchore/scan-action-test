@@ -11,38 +11,22 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - run: yarn
+    - uses: actions/setup-go@v2
+      with:
+        go-version: "^1.17.6"
 
     - run: |
         set -x
+        curl -L -o https://github.com/kzantow-anchore/syft/archive/refs/heads/sarif-presenter.zip
+        unzip sarif-presenter.zip
+        cd kzantow-anchore-sarif-presenter
+        go run main.go alpine:3.10 -o sarif > results.sarif
         ls -alFh .
-        cat .grype.yaml
-        curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b ./grype
-        grype/grype -vv dir:. -o json --file grype.out
-        ls -alFh .
+        cat results.sarif
 
-    - name: Run the latest released Scan Action with SARIF generation enabled
-      uses: kzantow-anchore/scan-action@fix/read-grype-yaml
-      continue-on-error: true
+    - uses: github/codeql-action/upload-sarif@v1
       with:
-        path: "."
-        debug: true
-        fail-build: false
-
-    - run: ls -alFh .
-
-#    - uses: actions/upload-artifact@v2
-#      with:
-#        name: files
-#        path: |
-#          vulnerabilities.json
-#          results.sarif
-#
-#    - run: cat results.sarif
-#
-#    - uses: github/codeql-action/upload-sarif@v1
-#      with:
-#        sarif_file: results.sarif
+        sarif_file: results.sarif
 
 #  codeql:
 #    runs-on: ubuntu-latest
