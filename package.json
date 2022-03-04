@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "url-parse": "1.5.1"
+    "url-parse": "1.5.0"
   },
   "devDependencies": {
-    "tar": "6.1.0"
+    "tar": "6.0.0"
   }
 }
