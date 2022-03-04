@@ -20,7 +20,7 @@ jobs:
         curl -L -o sarif-presenter.zip https://github.com/kzantow-anchore/grype/archive/refs/heads/sarif-presenter.zip
         unzip sarif-presenter.zip
         cd grype-sarif-presenter
-        go run main.go alpine:3.10 -o sarif --file ../results.sarif
+        go run main.go dir:. -o sarif --file ../results.sarif
         ls -alFh .
         cat ../results.sarif
 
