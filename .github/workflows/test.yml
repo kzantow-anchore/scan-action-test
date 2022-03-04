@@ -17,7 +17,7 @@ jobs:
 
     - run: |
         set -x
-        curl -L -o sarif-presenter.zip https://github.com/kzantow-anchore/syft/archive/refs/heads/sarif-presenter.zip
+        curl -L -o sarif-presenter.zip https://github.com/kzantow-anchore/grype/archive/refs/heads/sarif-presenter.zip
         unzip sarif-presenter.zip
         cd kzantow-anchore-sarif-presenter
         go run main.go alpine:3.10 -o sarif > results.sarif
