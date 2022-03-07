@@ -26,30 +26,30 @@ jobs:
         go run main.go dir:empty -o sarif --file empty.sarif
         
         ls -alFh .
+#
+#    - uses: github/codeql-action/upload-sarif@v1
+#      with:
+#        category: alpine-scan
+#        sarif_file: empty.sarif
+#        wait-for-processing: true
+#
+#    - uses: github/codeql-action/upload-sarif@v1
+#      with:
+#        category: dir-scan
+#        sarif_file: empty.sarif
+#        wait-for-processing: true
+#
+#    - uses: github/codeql-action/upload-sarif@v1
+#      with:
+#        sarif_file: empty.sarif
+#        wait-for-processing: true
 
     - uses: github/codeql-action/upload-sarif@v1
       with:
         category: alpine-scan
-        sarif_file: empty.sarif
+        sarif_file: alpine.sarif
         wait-for-processing: true
 
-    - uses: github/codeql-action/upload-sarif@v1
-      with:
-        category: dir-scan
-        sarif_file: empty.sarif
-        wait-for-processing: true
-
-    - uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: empty.sarif
-        wait-for-processing: true
-
-#    - uses: github/codeql-action/upload-sarif@v1
-#      with:
-#        category: alpine-scan
-#        sarif_file: alpine.sarif
-#        wait-for-processing: true
-#
 #    - uses: github/codeql-action/upload-sarif@v1
 #      with:
 #        category: dir-scan
