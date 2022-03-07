@@ -20,14 +20,19 @@ jobs:
         curl -L -o sarif-presenter.zip https://github.com/kzantow-anchore/grype/archive/refs/heads/sarif-presenter.zip
         unzip sarif-presenter.zip
         mv grype-sarif-presenter/* .
-        # go run main.go dir:. -o sarif --file results.sarif
-        go run main.go alpine:3.10 -o sarif --file results.sarif
+        go run main.go dir:. -o sarif --file alpine.sarif
+        go run main.go alpine:3.10 -o sarif --file dir.sarif
         ls -alFh .
         cat results.sarif
 
     - uses: github/codeql-action/upload-sarif@v1
       with:
-        sarif_file: results.sarif
+        sarif_file: alpine.sarif
+        wait-for-processing: true
+
+    - uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: dir.sarif
         wait-for-processing: true
 
 #  codeql:
