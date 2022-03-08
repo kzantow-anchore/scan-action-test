@@ -21,7 +21,7 @@ jobs:
         unzip sarif-presenter.zip
         mv grype-sarif-presenter/* .
         go run main.go dir:. -o sarif --file dir.sarif
-        go run main.go alpine:3.10 -o sarif --file alpine.sarif
+        go run main.go alpine:3.11 -o sarif --file alpine.sarif
         mkdir empty
         go run main.go dir:empty -o sarif --file empty.sarif
         
