@@ -11,21 +11,30 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: actions/setup-go@v2
+#    - uses: actions/setup-go@v2
+#      with:
+#        go-version: "^1.17.6"
+#
+#    - run: |
+#        set -xe
+#        curl -L -o sarif-presenter.zip https://github.com/kzantow-anchore/grype/archive/refs/heads/sarif-presenter.zip
+#        unzip sarif-presenter.zip
+#        mv grype-sarif-presenter/* .
+#        go run main.go dir:. -o sarif --file dir.sarif
+#        go run main.go alpine:3.11 -o sarif --file alpine.sarif
+#        mkdir empty
+#        go run main.go dir:empty -o sarif --file empty.sarif
+#
+#        ls -alFh .
+    - uses: kzantow-anchore/scan-action@update-sarif-generator
       with:
-        go-version: "^1.17.6"
+        path: .
 
-    - run: |
-        set -xe
-        curl -L -o sarif-presenter.zip https://github.com/kzantow-anchore/grype/archive/refs/heads/sarif-presenter.zip
-        unzip sarif-presenter.zip
-        mv grype-sarif-presenter/* .
-        go run main.go dir:. -o sarif --file dir.sarif
-        go run main.go alpine:3.11 -o sarif --file alpine.sarif
-        mkdir empty
-        go run main.go dir:empty -o sarif --file empty.sarif
-        
-        ls -alFh .
+    - uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: results.sarif
+        wait-for-processing: true
+
 #
 #    - uses: github/codeql-action/upload-sarif@v1
 #      with:
@@ -44,11 +53,11 @@ jobs:
 #        sarif_file: empty.sarif
 #        wait-for-processing: true
 
-    - uses: github/codeql-action/upload-sarif@v1
-      with:
-        category: alpine-scan
-        sarif_file: alpine.sarif
-        wait-for-processing: true
+#    - uses: github/codeql-action/upload-sarif@v1
+#      with:
+#        category: alpine-scan
+#        sarif_file: alpine.sarif
+#        wait-for-processing: true
 
 #    - uses: github/codeql-action/upload-sarif@v1
 #      with:
