@@ -29,12 +29,12 @@ jobs:
     - uses: kzantow-anchore/scan-action@update-sarif-generator
       with:
         path: .
+        fail-build: false
 
     - uses: github/codeql-action/upload-sarif@v1
       with:
         sarif_file: results.sarif
         wait-for-processing: true
-        fail-build: false
 
 #
 #    - uses: github/codeql-action/upload-sarif@v1
