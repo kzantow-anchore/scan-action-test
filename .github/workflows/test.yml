@@ -39,7 +39,11 @@ jobs:
     - uses: kzantow-anchore/scan-action/download-grype@add-install-grype-action
       id: grype
 
-    - run: ${{steps.grype.outputs.cmd}} dir:.
+    - run: |
+        echo cmd: ${{steps.grype.outputs.cmd}}
+
+    - run: |
+        ${{steps.grype.outputs.cmd}} dir:.
 
 #
 #    - uses: github/codeql-action/upload-sarif@v1
