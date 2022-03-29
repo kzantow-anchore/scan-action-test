@@ -26,7 +26,7 @@ jobs:
 #        go run main.go dir:empty -o sarif --file empty.sarif
 #
 #        ls -alFh .
-    - uses: kzantow-anchore/scan-action@update-sarif-generator
+    - uses: kzantow-anchore/scan-action@add-install-grype-action
       with:
         path: .
         fail-build: false
@@ -35,6 +35,11 @@ jobs:
       with:
         sarif_file: results.sarif
         wait-for-processing: true
+
+    - uses: kzantow-anchore/scan-action/download-grype@add-install-grype-action
+      id: grype
+
+    - run: ${{steps.grype.outputs.cmd}} dir:.
 
 #
 #    - uses: github/codeql-action/upload-sarif@v1
