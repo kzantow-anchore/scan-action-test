@@ -42,6 +42,7 @@ jobs:
           output-format: table
           cache-db: true
 
+
       - uses: kzantow-anchore/scan-action@feat/cache-grype-db
         id: scan-table-to-file
         with:
