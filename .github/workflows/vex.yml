@@ -31,6 +31,8 @@ jobs:
     name: Scan image with VEX file
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: 'Scan Docker image with Grype'
         uses: anchore/scan-action@v6
         with:
