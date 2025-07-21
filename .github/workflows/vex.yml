@@ -9,8 +9,6 @@ jobs:
     name: Scan image with VEX file
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
       - name: 'Scan Docker image with Grype'
         uses: kzantow-anchore/scan-action@log-errors
         with:
