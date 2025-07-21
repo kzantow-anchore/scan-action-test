@@ -2,7 +2,7 @@ name: "Docker scan with Anchore"
 
 on:
   pull_request:
-    branches: "*"
+    branches: main
 
 jobs:
   scan:
