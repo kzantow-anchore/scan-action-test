@@ -1,0 +1,49 @@
+name: "Docker scan with Anchore"
+
+on:
+  pull_request:
+    branches: "*"
+
+jobs:
+  scan:
+    name: Scan image without VEX file
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Scan Docker image with Grype'
+        uses: anchore/scan-action@v6
+        with:
+          image: alpine:3.22
+          severity-cutoff: high
+          by-cve: true
+          output-format: table
+          output-file: grype-alpine.txt
+          grype-version: v0.96.0
+
+      - name: Print result file
+        if: always()
+        run: |
+          echo "Content of Grype output file without VEX file:"
+          cat grype-alpine.txt
+
+  scan-vex:
+    name: Scan image with VEX file
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Scan Docker image with Grype'
+        uses: anchore/scan-action@v6
+        with:
+          image: alpine:3.22
+          severity-cutoff: high
+          by-cve: true
+          vex: vex.json
+          output-format: table
+          output-file: grype-alpine-vex.txt
+          grype-version: v0.96.0
+        env:
+          GRYPE_LOG_LEVEL: trace
+
+      - name: Print result file
+        if: always()
+        run: |
+          echo "Content of Grype output file with VEX file:"
+          cat grype-alpine-vex.txt

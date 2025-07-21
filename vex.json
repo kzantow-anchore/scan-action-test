@@ -1,0 +1,22 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://openvex.dev/docs/public/vex-af89979a6ad80cbdbb5f537b253901ff4c128cc3aa5cf7748cb954bba3213807",
+  "author": "Unknown Author",
+  "timestamp": "2025-07-21T15:07:51.796891+02:00",
+  "version": 1,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "CVE-2025-46394"
+      },
+      "timestamp": "2025-07-21T15:07:51.796893+02:00",
+      "products": [
+        {
+          "@id": "pkg:oci/alpine"
+        }
+      ],
+      "status": "not_affected",
+      "justification": "inline_mitigations_already_exist"
+    }
+  ]
+}
