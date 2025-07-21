@@ -40,10 +40,12 @@ jobs:
           output-file: grype-alpine-vex.txt
           grype-version: v0.96.0
         env:
+          GRYPE_LOG_FILE: grype.log
           GRYPE_LOG_LEVEL: trace
 
       - name: Print result file
         if: always()
         run: |
+          cat grype.log
           echo "Content of Grype output file with VEX file:"
           cat grype-alpine-vex.txt
