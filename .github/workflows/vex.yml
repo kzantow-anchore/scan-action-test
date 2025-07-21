@@ -15,7 +15,7 @@ jobs:
         uses: kzantow-anchore/scan-action@log-errors
         with:
           image: alpine:3.22
-          severity-cutoff: high
+          severity-cutoff: low
           by-cve: true
           vex: vex.json
           output-format: table
