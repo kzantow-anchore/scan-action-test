@@ -23,7 +23,7 @@ jobs:
       - run: |
           cat scan.grype.json
 
-      - uses: actions/upload-artifact@latest
+      - uses: actions/upload-artifact@v5
         with:
           name: scan-report
           path: scan.grype.json
