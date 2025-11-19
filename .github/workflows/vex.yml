@@ -12,18 +12,16 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: 'Scan Docker image with Grype'
-        uses: kzantow-anchore/scan-action@log-errors
+        uses: anchore/scan-action@latest
         with:
-          image: alpine:3.22
-          severity-cutoff: high
-          by-cve: true
-          vex: vex.json
-          output-format: table
-          output-file: grype-alpine-vex.txt
-          grype-version: v0.96.0
+          image: alpine:3.15
+          output-format: json
+          output-file: scan.grype.json
+          registry-username: FOOBAR_USER
+          registry-password: FOOBAR_PASS
 
       - name: Print result file
         if: always()
         run: |
-          echo "Content of Grype output file with VEX file:"
-          cat grype-alpine-vex.txt
+          echo "Content of Grype output file file:"
+          cat scan.grype.json
