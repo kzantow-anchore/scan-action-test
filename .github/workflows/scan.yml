@@ -1,0 +1,29 @@
+name: "Docker scan with Anchore"
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  scan-vex:
+    name: Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: anchore/scan-action@latest
+        with:
+          image: alpine:3.15
+          output-format: json
+          output-file: scan.grype.json
+          fail-build: false
+          registry-username: ${{ secrets.FOOBAR_USER }}
+          registry-password: ${{ secrets.FOOBAR_PASS }}
+
+      - run: |
+          cat scan.grype.json
+
+      - uses: actions/upload-artifact@latest
+        with:
+          name: scan-report
+          path: scan.grype.json
