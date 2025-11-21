@@ -17,8 +17,6 @@ jobs:
           output-format: json
           output-file: scan.grype.json
           fail-build: false
-          registry-username: ${{ secrets.FOOBAR_USER }}
-          registry-password: ${{ secrets.FOOBAR_PASS }}
 
       - run: |
           cat scan.grype.json
