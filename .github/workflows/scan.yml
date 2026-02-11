@@ -14,10 +14,15 @@ jobs:
       - uses: anchore/scan-action@dev-esbuild
         with:
           image: alpine:3.15
-          output-format: json
+          output-format: sarif
           output-file: scan.grype.json
           fail-build: false
 
+      - name: upload Anchore scan SARIF report
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
+          
       - run: |
           cat scan.grype.json
 
