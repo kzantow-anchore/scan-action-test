@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: anchore/scan-action@dev-esbuild
+        id: scan
         with:
           image: alpine:3.15
           output-format: sarif
