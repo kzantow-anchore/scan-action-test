@@ -9,7 +9,7 @@ jobs:
     name: Scan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@main
 
       - uses: kzantow-anchore/scan-action@chore/node24
         id: scan
@@ -20,14 +20,14 @@ jobs:
           fail-build: false
 
       - name: upload Anchore scan SARIF report
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@main
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
           
       - run: |
           cat scan.grype.json
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@main
         with:
           name: scan-report
           path: scan.grype.json
