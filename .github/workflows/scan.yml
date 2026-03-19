@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: anchore/scan-action@dependabot/npm_and_yarn/actions/core-3.0.0
+      - uses: kzantow-anchore/scan-action@chore/node24
         id: scan
         with:
           image: alpine:3.15
